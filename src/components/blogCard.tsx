@@ -28,7 +28,7 @@ export default function BlogCard({ post }: { post: Post }) {
         <Link
           href={`/blog/${post.slug}`}
           aria-label={`Read more about ${post.title}`} // Better accessibility.
-          className="block px-4 py-2 sm:py-3 lg:py-4 bg-yellow-500 text-black text-center rounded text-dark font-semibold mt-4"
+          className="block px-4 py-2 sm:py-3 lg:py-4 border border-black text-black  hover:text-white hover:bg-black text-center rounded  font-semibold mt-4"
         >
           Read More
         </Link>

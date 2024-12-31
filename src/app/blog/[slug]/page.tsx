@@ -4,11 +4,11 @@ import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
 import { components } from "@/components/CustomComponent";
 
-export default async function Page({ params }) {
+export default async function Page({ params }: { params: { slug: string } }) {
   const query = `*[_type == 'post' && slug.current == $slug]{
     title, summary, image, content, author->{bio, image, name}
   }`;
-  
+
   // Fetch the data directly in the component
   const post = await client.fetch(query, { slug: params.slug });
 
@@ -30,8 +30,8 @@ export default async function Page({ params }) {
         alt="AI for everyone"
         className="rounded mx-auto"
       />
-      <section className="text-center">
-        <h2 className="text-xl xs:text-2xl md:text-3xl font-bold uppercase text-accentDarkPrimary">
+      <section >
+        <h2 className="text-base xs:text-2xl md:text-3xl font-bold uppercase text-accentDarkPrimary">
           Summary of the Blog
         </h2>
         <p className="text-base md:text-xl leading-relaxed text-justify text-dark/80 dark:text-light/80">
@@ -46,15 +46,14 @@ export default async function Page({ params }) {
           alt="blogcreator"
           className="object-cover rounded-full h-12 w-12 sm:h-24 sm:w-24 mx-auto"
         />
-        <div className="flex flex-col gap-1">
-          <h3 className="text-xl font-bold text-dark dark:text-light">About Author</h3>
-          <h3 className="text-xl font-bold text-dark dark:text-light">
-            {blogPost.author.name}
-          </h3>
-          <p className="italic text-xs xs:text-sm sm:text-base text-dark/80 dark:text-light/80">
+    <div className="p-4 bg-white dark:bg-dark/80 rounded-lg shadow-md shadow-gray-300 dark:shadow-black/80 flex flex-col gap-2">
+          <h3 className="text-xl font-bold text-black dark:text-light">
+          {blogPost.author.name}
+         </h3>
+           <p className="italic text-xs xs:text-sm sm:text-base text-dark/80 dark:text-light/80">
             {blogPost.author.bio}
-          </p>
-        </div>
+           </p>
+    </div>
       </section>
       <div className="text-lg leading-normal text-black dark:text-white">
         <PortableText value={blogPost.content} components={components} />

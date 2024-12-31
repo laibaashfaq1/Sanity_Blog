@@ -8,7 +8,7 @@ const Footer = () => {
           Bringing you the best insights and stories
         </p>
         <p className='text-center font-semibold'>
-          LAIBA ASHFAQ AHMED — © 2024 All Rights Reserved
+        BlogbyLAiBa — © 2024 All Rights Reserved
         </p>
       </div>
     </footer>
