@@ -5,13 +5,13 @@ import { PortableText } from "next-sanity";
 import { components } from "@/components/CustomComponent";
 
 // Define SegmentParams and PageProps
-type SegmentParams<T extends object = {}> = T extends Record<string, any>
+type SegmentParams<T extends object = Record<string, unknown>> = T extends Record<string, unknown>
   ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }
   : T;
 
 export interface PageProps {
   params?: SegmentParams<{ slug: string }>;
-  searchParams?: Record<string, string | string[] | undefined>;
+  searchParams?: Record<string, unknown>;
 }
 
 // Page Component
