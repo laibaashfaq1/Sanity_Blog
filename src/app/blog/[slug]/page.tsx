@@ -4,20 +4,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { PortableText } from "next-sanity";
 import { components } from "@/components/CustomComponent";
 
-type SegmentParams<T extends Object = any> = T extends Record<string, any>
-  ? { [K in keyof T]: T[K] extends string ? string | string[] | undefined : never }
-  : T;
-
-export interface PageProps {
-  params?: SegmentParams<{ slug: string }>;
-  searchParams?: any;
-}
-
-export default async function Page({ params }: PageProps) {
-  if (!params || !params.slug) {
-    return <div>Post not found</div>;
-  }
-
+export default async function Page({ params }: { params: { slug: string } }) {
   const query = `*[_type == 'post' && slug.current == $slug]{
     title, summary, image, content, author->{bio, image, name}
   }`;
@@ -43,7 +30,7 @@ export default async function Page({ params }: PageProps) {
         alt="AI for everyone"
         className="rounded mx-auto"
       />
-      <section>
+      <section >
         <h2 className="text-base xs:text-2xl md:text-3xl font-bold uppercase text-accentDarkPrimary">
           Summary of the Blog
         </h2>
@@ -59,14 +46,14 @@ export default async function Page({ params }: PageProps) {
           alt="blogcreator"
           className="object-cover rounded-full h-12 w-12 sm:h-24 sm:w-24 mx-auto"
         />
-        <div className="p-4 bg-white dark:bg-dark/80 rounded-lg shadow-md shadow-gray-300 dark:shadow-black/80 flex flex-col gap-2">
+    <div className="p-4 bg-white dark:bg-dark/80 rounded-lg shadow-md shadow-gray-300 dark:shadow-black/80 flex flex-col gap-2">
           <h3 className="text-xl font-bold text-black dark:text-light">
-            {blogPost.author.name}
-          </h3>
-          <p className="italic text-xs xs:text-sm sm:text-base text-dark/80 dark:text-light/80">
+          {blogPost.author.name}
+         </h3>
+           <p className="italic text-xs xs:text-sm sm:text-base text-dark/80 dark:text-light/80">
             {blogPost.author.bio}
-          </p>
-        </div>
+           </p>
+    </div>
       </section>
       <div className="text-lg leading-normal text-black dark:text-white">
         <PortableText value={blogPost.content} components={components} />
